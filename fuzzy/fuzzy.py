@@ -32,11 +32,11 @@ def tNorm(a, b):
         _ = iter(a)
     except TypeError:
         return min(a, b)  # Gödel–Dummett t-norm
-    # return a*b#product t-conorm
-    # return max(a+b-1,0)#Łukasiewicz t-norm
-    # return min(a,b) if max(a,b)==1 else 0#drastic t-norm
-    # return (a*b)/(2-(a+b-a*b))#Einstein t-norm
-    # return (a*b)/(a+b-a*b)#Hamacher t-norm
+        # return a*b # product t-conorm
+        # return max(a+b-1,0) # Łukasiewicz t-norm
+        # return min(a,b) if max(a,b)==1 else 0 # drastic t-norm
+        # return (a*b)/(2-(a+b-a*b)) # Einstein t-norm
+        # return (a*b)/(a+b-a*b) # Hamacher t-norm
     else:
         try:
             _ = iter(b)
@@ -45,22 +45,16 @@ def tNorm(a, b):
         return np.fmin(a, b)
 
 
-# return np.multiply(a,b)#product t-conorm
-# return [max(x+y-1,0) for x,y in zip(a,b)]#Łukasiewicz t-norm
-# return [min(x,y) if max(x,y)==1 else 0 for x,y in zip(a,b)]#drastic t-norm
-# return [(x*y)/(2-(x+y-x*y)) for x,y in zip(a,b)]#Einstein t-norm
-# return [(x*y)/(x+y-x*y) for x,y in zip(a,b)]#Hamacher t-norm
-
 def sNorm(a, b):
     try:
         _ = iter(a)
     except TypeError:
         return max(a, b)  # Gödel–Dummett t-norm
-    # return a+b-a*b#product t-conorm
-    # return min(a+b,1)#Łukasiewicz t-conorm
-    # return max(a,b) if min(a,b)==0 else 1#drastic t-conorm
-    # return (a+b)/(1+a*b)#Einstein t-conorm
-    # return (a+b-2*a*b)/(1-a*b)#Hamacher t-conorm
+        # return a+b-a*b # product t-conorm
+        # return min(a+b,1) # Łukasiewicz t-conorm
+        # return max(a,b) if min(a,b)==0 else 1 # drastic t-conorm
+        # return (a+b)/(1+a*b) # Einstein t-conorm
+        # return (a+b-2*a*b)/(1-a*b) # Hamacher t-conorm
     else:
         try:
             _ = iter(b)
@@ -69,15 +63,8 @@ def sNorm(a, b):
         return np.fmax(a, b)
 
 
-# return [x+y-x*y for x,y in zip(a,b)]#product t-conorm
-# return [min(x+y,1) for x,y in zip(a,b)]#Łukasiewicz t-conorm
-# return [max(x,y) if min(x,y)==0 else 1 for x,y in zip(a,b)]#drastic t-conorm
-# return [(x+y)/(1+x*y) for x,y in zip(a,b)]#Einstein t-conorm
-# return [(x+y-2*x*y)/(1-x*y) for x,y in zip(a,b)]#Hamacher t-conorm
-
-
-# defuzz = lambda agg: len(agg)-np.argmax(agg[::-1])-1#max of maximum
-# defuzz = np.argmax#min of maximum
+# defuzz = lambda agg: len(agg)-np.argmax(agg[::-1])-1 # max of maximum
+# defuzz = np.argmax # min of maximum
 defuzz = lambda agg: np.mean(np.where(agg == max(agg)))  # mean of maximum
 
 step = 0.1
