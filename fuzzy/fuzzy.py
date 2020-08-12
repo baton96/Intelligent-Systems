@@ -4,20 +4,20 @@ import numpy as np
 
 
 def trapezoid(val, bottomLeft, upperLeft, upperRight, bottomRight):
-    if (val < bottomLeft):
+    if val < bottomLeft:
         return 0
-    elif (val < upperLeft):
+    elif val < upperLeft:
         return (val - bottomLeft) / (upperLeft - bottomLeft)
-    elif (val < upperRight):
+    elif val < upperRight:
         return 1.0
-    elif (val < bottomRight):
+    elif val < bottomRight:
         return (bottomRight - val) / (bottomRight - upperRight)
     else:
         return 0
 
 
 def pi(val, bottomLeft, upperLeft, upperRight, bottomRight):
-    if (val < (upperLeft + upperRight) / 2):
+    if val < (upperLeft + upperRight) / 2:
         return 1 / (1 + math.exp(k * ((bottomLeft + upperLeft) / 2 - val)))
     else:
         return 1 / (1 + math.exp(k * (val - (upperRight + bottomRight) / 2)))
@@ -30,7 +30,7 @@ def fuzzySet(bottomLeft, upperLeft, upperRight, bottomRight, stop, start=0):
 def tNorm(a, b):
     try:
         _ = iter(a)
-    except:
+    except TypeError:
         return min(a, b)  # Gödel–Dummett t-norm
     # return a*b#product t-conorm
     # return max(a+b-1,0)#Łukasiewicz t-norm
@@ -40,7 +40,7 @@ def tNorm(a, b):
     else:
         try:
             _ = iter(b)
-        except:
+        except TypeError:
             b = np.array([b] * len(a))
         return np.fmin(a, b)
 
@@ -54,7 +54,7 @@ def tNorm(a, b):
 def sNorm(a, b):
     try:
         _ = iter(a)
-    except:
+    except TypeError:
         return max(a, b)  # Gödel–Dummett t-norm
     # return a+b-a*b#product t-conorm
     # return min(a+b,1)#Łukasiewicz t-conorm
@@ -64,7 +64,7 @@ def sNorm(a, b):
     else:
         try:
             _ = iter(b)
-        except:
+        except TypeError:
             b = np.array([b] * len(a))
         return np.fmax(a, b)
 
